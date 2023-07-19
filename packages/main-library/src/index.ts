@@ -101,8 +101,6 @@ const applyColumnFormat = (worksheet: WorkSheet, columnIds: string[], columnForm
 
       if (row === 0) continue
 
-      console.log(columnFormula)
-
       if (worksheet[ref] && columnFormat) {
         worksheet[ref].z = columnFormat
       }
