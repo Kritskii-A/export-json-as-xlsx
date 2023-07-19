@@ -1,6 +1,6 @@
 import express from "express"
 import { join } from "path"
-import xlsx, { IJsonSheet, ISettings } from "json-as-xlsx"
+import xlsx, { IJsonSheet, ISettings } from "export-json-as-xlsx"
 
 const app = express()
 app.use(express.json())

@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    if: github.repository == 'LuisEnMarroquin/json-as-xlsx'
+    if: github.repository == 'Kritskii-A/export-json-as-xlsx'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -41,5 +41,5 @@ jobs:
         with:
           folder: build
           branch: gh-pages
-          git-config-name: LuisEnMarroquin
-          git-config-email: mluis651@gmail.com
+          git-config-name: AleksandrKritskii
+          git-config-email: kritskii-a@bk.ru

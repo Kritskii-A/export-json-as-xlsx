@@ -1,19 +1,13 @@
-# json-as-xlsx
+# export-json-as-xlsx
 
 This is a tool that helps to build an excel from a json and it depends only on `xlsx` library
-
-You can see a live example of it working on any of this sites (there are many just in case):
-
-- [xlsx.pages.dev](https://xlsx.pages.dev)
-- [xlsx.marroquin.dev](https://xlsx.marroquin.dev)
-- [xlsx.luismarroquin.com](https://xlsx.luismarroquin.com)
 
 ## Usage
 
 ```js
-import xlsx from "json-as-xlsx"
+import xlsx from "export-json-as-xlsx"
 // or require
-let xlsx = require("json-as-xlsx")
+let xlsx = require("export-json-as-xlsx")
 
 let data = [
   {
@@ -96,9 +90,29 @@ Examples
 "h:mm AM/PM" // 1:10 PM
 ```
 
+### Cell Object
+
+| Key         | Description                                                         |
+| ----------- | ------------------------------------------------------------------- |
+| `isFormula` | use formula                                                         |
+| `format`    | use custom format                                                   |
+| `type`      | cell type: `b` Boolean, `n` Number, `e` error, `s` String, `d` Date |
+| `width`     | cell width (auto width default)                                     |
+| `r`         | rich text encoding (if applicable)                                  |
+| `h`         | HTML rendering of the rich text (if applicable)                     |
+| `c`         | comments associated with the cell \*\*                              |
+| `z`         | number format string associated with the cell (if requested)        |
+| `l`         | cell hyperlink object (.Target holds link, .tooltip is tooltip)     |
+| `s`         | the style/theme of the cell (if applicable)                         |
+
 ## Examples
 
-This are files used for development, please change imports from `../../src/index` to `json-as-xlsx`
+This are files used for development, please change imports from `../../src/index` to `export-json-as-xlsx`
 
-- [Express with TypeScript](https://github.com/LuisEnMarroquin/json-as-xlsx/blob/main/packages/demo-express)
-- [ReactJS with TypeScript](https://github.com/LuisEnMarroquin/json-as-xlsx/blob/main/packages/demo-reactjs)
+- [Express with TypeScript](https://github.com/Kritskii-A/export-json-as-xlsx/blob/main/packages/demo-express)
+- [ReactJS with TypeScript](https://github.com/Kritskii-A/export-json-as-xlsx/blob/main/packages/demo-reactjs)
+
+## 🙏 Thanks
+
+This project is a fork of [SheetJS/sheetjs](https://github.com/sheetjs/sheetjs) combined with code from
+[json-as-xlsx](https://github.com/LuisEnMarroquin/json-as-xlsx) (by [LuisEnMarroquin](https://github.com/LuisEnMarroquin)).

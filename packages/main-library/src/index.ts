@@ -4,6 +4,9 @@ export interface IColumn {
   label: string
   value: string | ((value: IContent) => string | number | boolean | Date | IContent)
   format?: string
+  type?: string
+  isFormula?: boolean
+  width?: string
 }
 
 export interface IContent {
@@ -90,6 +93,69 @@ const applyColumnFormat = (worksheet: WorkSheet, columnIds: string[], columnForm
   }
 }
 
+const applyColumnTypes = (worksheet: WorkSheet, columnIds: string[], columnTypes: Array<string | null>) => {
+  for (let i = 0; i < columnIds.length; i += 1) {
+    const columnType = columnTypes[i]
+
+    if (!columnType) {
+      continue
+    }
+
+    const column = utils.decode_col(columnIds[i])
+    const range = utils.decode_range(worksheet["!ref"] ?? "")
+
+    for (let row = range.s.r + 1; row <= range.e.r; ++row) {
+      const ref = utils.encode_cell({ r: row, c: column })
+
+      if (worksheet[ref]) {
+        worksheet[ref].t = columnType
+      }
+    }
+  }
+}
+
+const applyColumnFormuls = (worksheet: WorkSheet, columnIds: string[], columnFormuls: Array<boolean | null>) => {
+  for (let i = 0; i < columnIds.length; i += 1) {
+    const columnFormul = columnFormuls[i]
+
+    if (!columnFormul) {
+      continue
+    }
+
+    const column = utils.decode_col(columnIds[i])
+    const range = utils.decode_range(worksheet["!ref"] ?? "")
+
+    for (let row = range.s.r + 1; row <= range.e.r; ++row) {
+      const ref = utils.encode_cell({ r: row, c: column })
+
+      if (worksheet[ref] && worksheet[ref].v[0] === "=") {
+        worksheet[ref].f = worksheet[ref].v
+      }
+    }
+  }
+}
+
+const applyColumnWidths = (worksheet: WorkSheet, columnIds: string[], columnWidths: Array<string | null>) => {
+  for (let i = 0; i < columnIds.length; i += 1) {
+    const columnWidth = columnWidths[i]
+
+    if (!columnWidth) {
+      continue
+    }
+
+    const column = utils.decode_col(columnIds[i])
+    const range = utils.decode_range(worksheet["!ref"] ?? "")
+
+    for (let row = range.s.r; row <= range.e.r; ++row) {
+      const ref = utils.encode_cell({ r: row, c: column })
+
+      if (worksheet[ref]) {
+        worksheet[ref].width = columnWidth
+      }
+    }
+  }
+}
+
 const getWorksheetColumnIds = (worksheet: WorkSheet): string[] => {
   const columnRange = utils.decode_range(worksheet["!ref"] ?? "")
 
@@ -130,6 +196,7 @@ export const getWorksheetColumnWidths = (worksheet: WorkSheet, extraLength: numb
 
     const maxWidthCell = columnCells.reduce((maxWidth, cellId) => {
       const cell = worksheet[cellId]
+      if (cell.width) return cell.width
 
       const cellContentLength: number = getObjectLength(cell.v)
 
@@ -165,6 +232,17 @@ const getWorksheet = (jsonSheet: IJsonSheet, settings: ISettings): WorkSheet => 
 
   const worksheetColumnFormats = jsonSheet.columns.map((jsonSheetColumn) => jsonSheetColumn.format ?? null)
   applyColumnFormat(worksheet, worksheetColumnIds, worksheetColumnFormats)
+
+  const worksheetColumnTypes = jsonSheet.columns.map((jsonSheetColumn) => jsonSheetColumn.type ?? null)
+  applyColumnTypes(worksheet, worksheetColumnIds, worksheetColumnTypes)
+
+  const worksheetColumnFormuls = jsonSheet.columns.map((jsonSheetColumn) => jsonSheetColumn.isFormula ?? null)
+  applyColumnFormuls(worksheet, worksheetColumnIds, worksheetColumnFormuls)
+
+  const worksheetColumnWidths = jsonSheet.columns.map((jsonSheetColumn) => {
+    return jsonSheetColumn.width ?? null
+  })
+  applyColumnWidths(worksheet, worksheetColumnIds, worksheetColumnWidths)
 
   worksheet["!cols"] = getWorksheetColumnWidths(worksheet, settings.extraLength)
 
@@ -207,7 +285,7 @@ export const xlsx = (jsonSheets: IJsonSheet[], settings: ISettings = {}, workboo
 
 export default xlsx
 
-export const libraryName = "json-as-xlsx"
+export const libraryName = "export-json-as-xlsx"
 
 module.exports = xlsx
 module.exports.getContentProperty = getContentProperty

@@ -1,13 +1,13 @@
 {
-  "name": "json-as-xlsx",
-  "version": "2.5.3",
+  "name": "export-json-as-xlsx",
+  "version": "0.0.1",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "typings": "dist/index.d.ts",
   "description": "Create excel xlsx file from json",
-  "author": "LuisEnMarroquin <luis@marroquin.dev>",
-  "homepage": "https://xlsx.marroquin.dev",
+  "author": "Aleksandr Kritskii <kritskii-a@bk.ru>",
+  "homepage": "https://kritskii-a.github.io",
   "type": "commonjs",
   "private": false,
   "scripts": {
@@ -35,10 +35,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/LuisEnMarroquin/json-as-xlsx.git"
+    "url": "https://github.com/Kritskii-A/export-json-as-xlsx.git"
   },
   "bugs": {
-    "url": "https://github.com/LuisEnMarroquin/json-as-xlsx/issues"
+    "url": "https://github.com/Kritskii-A/export-json-as-xlsx/issues"
   },
   "keywords": [
     "json",
@@ -57,7 +57,9 @@
     "xlsx-from-json",
     "microsoft",
     "microsoft-xlsx",
-    "microsoft-excel"
+    "microsoft-excel",
+    "spreadsheet",
+    "xls"
   ],
   "browserslist": [
     ">0.2%",
