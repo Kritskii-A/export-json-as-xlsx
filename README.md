@@ -13,25 +13,26 @@ let data = [
   {
     sheet: "Adults",
     columns: [
-      { label: "User", value: "user" }, // Top level data
-      { label: "Age", value: (row) => row.age + " years" }, // Custom format
-      { label: "Phone", value: (row) => (row.more ? row.more.phone || "" : "") }, // Run functions
+      { label: "User", value: "user", isFormula: true }, // Use formuls
+      { label: "Age", value: "age", format: '# "years"' }, // Custom format
+      { label: "Phone", value: (row: any) => row?.more?.phone ?? "", width: "5" }, // Run functions and add width
+      { label: "Date", value: "date", format: "DD.MM.YYYY", type: "d" }, // Set type
     ],
     content: [
-      { user: "Andrea", age: 20, more: { phone: "11111111" } },
-      { user: "Luis", age: 21, more: { phone: "12345678" } },
+      { user: `=HYPERLINK("${window.location.origin}", "Alex")`, age: 20, more: { phone: "11111111" }, date: "1999.02.20" },
+      { user: "Luis", age: 21, more: { phone: "12345678" }, date: "1999.01.21" },
     ],
   },
   {
     sheet: "Children",
     columns: [
       { label: "User", value: "user" }, // Top level data
-      { label: "Age", value: "age", format: '# "years"' }, // Column format
-      { label: "Phone", value: "more.phone", format: "(###) ###-####" }, // Deep props and column format
+      { label: "Age", value: "age", format: '# "years"' }, // Custom format
+      { label: "Phone", value: (row: any) => row?.more?.phone ?? "" }, // Run functions
     ],
     content: [
-      { user: "Manuel", age: 16, more: { phone: 9999999900 } },
-      { user: "Ana", age: 17, more: { phone: 8765432135 } },
+      { user: "Manuel", age: 16, more: { phone: "99999999" } },
+      { user: "Ana", age: 17, more: { phone: "87654321" } },
     ],
   },
 ]
