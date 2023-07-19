@@ -98,12 +98,6 @@ Examples
 | `format`    | use custom format                                                   |
 | `type`      | cell type: `b` Boolean, `n` Number, `e` error, `s` String, `d` Date |
 | `width`     | cell width (auto width default)                                     |
-| `r`         | rich text encoding (if applicable)                                  |
-| `h`         | HTML rendering of the rich text (if applicable)                     |
-| `c`         | comments associated with the cell \*\*                              |
-| `z`         | number format string associated with the cell (if requested)        |
-| `l`         | cell hyperlink object (.Target holds link, .tooltip is tooltip)     |
-| `s`         | the style/theme of the cell (if applicable)                         |
 
 ## Examples
 
