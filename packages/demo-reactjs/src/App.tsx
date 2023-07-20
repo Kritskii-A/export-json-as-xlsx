@@ -32,6 +32,7 @@ function App() {
     let settings = {
       fileName: "MySpreadsheet",
     }
+
     xlsx(data, settings)
   }
 
