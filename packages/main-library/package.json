@@ -1,13 +1,13 @@
 {
   "name": "export-json-as-xlsx",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "typings": "dist/index.d.ts",
   "description": "Create excel xlsx file from json",
   "author": "Aleksandr Kritskii <kritskii-a@bk.ru>",
-  "homepage": "https://kritskii-a.github.io",
+  "homepage": "https://export-json-as-xlsx.vercel.app",
   "type": "commonjs",
   "private": false,
   "scripts": {

@@ -2,6 +2,10 @@
 
 This is a tool that helps to build an excel from a json and it depends only on `xlsx` library
 
+You can see a live example of it working on any of this sites (there are many just in case):
+
+- [export-json-as-xlsx.vercel.app](https://export-json-as-xlsx.vercel.app)
+
 ## Usage
 
 ```js
